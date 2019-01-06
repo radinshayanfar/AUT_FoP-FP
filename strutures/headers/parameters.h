@@ -11,3 +11,5 @@
 struct Parameters {
     int people, court, treasury;
 };
+
+struct Parameters Parameters_Parameters(int people, int court, int treasury);

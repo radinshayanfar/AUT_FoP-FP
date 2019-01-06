@@ -11,7 +11,7 @@
 #include <string.h>
 #include "../headers/parameters.h"
 
-struct Parameters parameters(int people, int court, int treasury) {
+struct Parameters Parameters_Parameters(int people, int court, int treasury) {
     struct Parameters params;
     params.people = people;
     params.court = court;
