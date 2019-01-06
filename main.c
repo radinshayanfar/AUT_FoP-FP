@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <time.h>
 
-#include "strutures/headers/user.h"
+#include "structures/headers/user.h"
 
 #define DEBUG_MESSAGE(X) {\
     printf("=== File: \"%s\" - ", __FILE__); \

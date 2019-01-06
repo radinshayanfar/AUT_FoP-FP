@@ -17,7 +17,7 @@ main: parameters user
 	gcc main.c -o main.o -c -lm
 
 parameters:
-	gcc strutures/sources/parameters.c -o parameters.o -c -lm
+	gcc structures/sources/parameters.c -o parameters.o -c -lm
 
 user:
-	gcc strutures/sources/user.c -o user.o -c -lm
+	gcc structures/sources/user.c -o user.o -c -lm
