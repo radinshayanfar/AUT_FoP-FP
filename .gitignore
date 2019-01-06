@@ -5,3 +5,6 @@
 #Ignore .vscode directory
 .vscode/
 
+#Ignore sample.c file
+sample.c
+
