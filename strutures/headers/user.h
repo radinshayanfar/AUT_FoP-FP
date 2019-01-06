@@ -8,7 +8,7 @@
 
 // (c) 2019 - Radin Shayanfar
 
-#include "parameters.h"
+#include "parameter.h"
 
 struct User {
     char name[100];
