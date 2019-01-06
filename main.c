@@ -3,6 +3,8 @@
 #include <stdbool.h>
 #include <time.h>
 
+#include "strutures/headers/user.h"
+
 #define DEBUG_MESSAGE(X) {\
     printf("=== File: \"%s\" - ", __FILE__); \
     printf("Function: \"%s\" - ", __func__); \
@@ -12,7 +14,7 @@
 
 int main() {
 
-    
+    struct User radin = User_User("radin");
 
     return 0;
 }
