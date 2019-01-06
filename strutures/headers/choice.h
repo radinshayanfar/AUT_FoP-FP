@@ -10,7 +10,12 @@
 
 #include "parameters.h"
 
+#ifndef CHOICE_H
+#define CHOICE_H
+
 struct Choice {
     char choice[200];
     struct Parameters effect;
 };
+
+#endif

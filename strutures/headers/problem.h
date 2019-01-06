@@ -10,7 +10,12 @@
 
 #include "choice.h"
 
+#ifndef PROBLEM_H
+#define PROBLEM_H
+
 struct Problem {
     char problem[200];
     struct Choice choice1, choice2;
 };
+
+#endif
