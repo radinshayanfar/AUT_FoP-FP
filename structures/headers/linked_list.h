@@ -8,15 +8,14 @@
 
 // (c) 2019 - Radin Shayanfar
 
-#include "choice.h"
+#include "problem.h"
 
-#ifndef PROBLEM_H
-#define PROBLEM_H
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
 
-struct Problem {
-    char text[200];
-    struct Choice choice1, choice2;
-    int num;
+struct Problem_Node {
+    struct Problem problem;
+    struct Problem_Node *next;
 };
 
 #endif

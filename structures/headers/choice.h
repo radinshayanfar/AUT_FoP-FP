@@ -14,7 +14,7 @@
 #define CHOICE_H
 
 struct Choice {
-    char choice[200];
+    char text[200];
     struct Parameters effect;
 };
 
