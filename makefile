@@ -9,6 +9,11 @@ endif
 run: compile
 	@./$(program).out $(run_param)
 
+problem_create:
+	@cd choices ; \
+	gcc problem_create.c -o problem_create.out -lm ; \
+	./problem_create.out
+
 compile: main
 	@gcc *.o -o $(program).out -lm
 	@rm *.o
