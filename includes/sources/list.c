@@ -39,3 +39,12 @@ void delete_at_index(struct Problem_Node **list, int index) {
     free(temp);
 
 }
+
+int list_count(struct Problem_Node *list) {
+    int i = 0;
+    while (list != NULL) {
+        i++;
+        list = list->next;
+    }
+    return i;
+}

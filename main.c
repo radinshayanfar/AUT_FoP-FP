@@ -17,6 +17,8 @@
 #include "structures/headers/user.h"
 #include "structures/headers/linked_list.h"
 #include "includes/headers/list.h"
+#include "includes/headers/file.h"
+#include "structures/headers/state.h"
 
 #define DEBUG_MESSAGE(X) {\
     printf("=== File: \"%s\" - ", __FILE__); \
@@ -27,7 +29,10 @@
 
 // ====================================== //
 
-struct Problem_Node *get_random_problem(struct Problem_Node *list, int problem_list_len) {
+struct Problem_Node *get_random_problem(struct Problem_Node *list) {
+
+    int problem_list_len = list_count(list);
+
     int random = rand() % problem_list_len;
     
     for(int i = 0; i < random; i++) {
@@ -35,57 +40,6 @@ struct Problem_Node *get_random_problem(struct Problem_Node *list, int problem_l
     }
     return list;
     
-}
-
-struct Problem file_to_problem(char ch_file_name[]) {
-
-    char address[40] = "choices/";
-    strcat(address, ch_file_name);
-    FILE *fp = fopen(address, "r");
-    if (fp == NULL) {
-        fprintf(stderr, "Cannot open \"%s\"\n", address);
-        exit;
-    }
-
-    struct Problem prob;
-    fgets(prob.text, 200, fp);
-    fgets(prob.choice1.text, 200, fp);
-    fscanf(fp, "%d%d%d", &prob.choice1.effect.people, &prob.choice1.effect.court, &prob.choice1.effect.treasury);
-    fgets(prob.choice2.text, 200, fp);
-    fscanf(fp, "%d%d%d", &prob.choice2.effect.people, &prob.choice2.effect.court, &prob.choice2.effect.treasury);
-    prob.num = 3;
-
-    return prob;
-
-}
-
-void read_problems(struct Problem_Node **list, int *problem_list_len) {
-
-    struct Problem_Node *last_node = *list;
-
-    FILE *choices = fopen("choices/CHOICES.txt", "r");
-    if (choices == NULL) {
-        fprintf(stderr, "Cannot open \"CHOICES.txt\"\n");
-        exit;
-    }
-
-    *problem_list_len = 0;
-    char ch_file_name[10];
-    while ( (fscanf(choices, "%s", ch_file_name)) != EOF ) {
-        struct Problem problem = file_to_problem(ch_file_name);
-
-        if (last_node == NULL) {
-            *list = new_node(problem);
-            last_node = *list;
-        } else {
-            last_node->next = new_node(problem);
-            last_node = last_node->next;
-        }
-
-        (*problem_list_len)++;
-
-    }
-
 }
 
 void printlist(struct Problem_Node *list) {
@@ -102,11 +56,15 @@ int main() {
 
     srand(time(NULL));
 
+    struct User user = User_User("Radin Sh");
     struct Problem_Node *problems_list = NULL;
-    int problem_list_len;
-    read_problems(&problems_list, &problem_list_len);
-    // printlist(problems_list);
-    printf("%s", get_random_problem(problems_list, problem_list_len)->problem.choice1.text);
+    read_problems(&problems_list);
+    // printf("%s", get_random_problem(problems_list)->problem.choice1.text);
+    // printf("%d\n", list_count(problems_list));
+    // save_to_file(problems_list, user, IN_GAME);
+    printf("%d\n", restore_from_file(&problems_list, &user));
+    printf("%d\n", user.user_params.court);
+    printlist(problems_list);
 
     return 0;
 }

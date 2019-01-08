@@ -8,3 +8,5 @@
 #Ignore sample.c file
 sample.c
 
+#Ignore saves directory
+saves/

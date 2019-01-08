@@ -18,7 +18,7 @@ compile: main
 	@gcc *.o -o $(program).out -lm
 	@rm *.o
 
-main: parameters user list
+main: parameters user list file
 	@gcc main.c -o main.o -c -lm
 
 parameters:
@@ -29,3 +29,6 @@ user:
 
 list:
 	@gcc includes/sources/list.c -o list.o -c -lm
+
+file:
+	@gcc includes/sources/file.c -o file.o -c -lm
