@@ -27,6 +27,16 @@
 
 // ====================================== //
 
+struct Problem_Node *get_random_problem(struct Problem_Node *list, int problem_list_len) {
+    int random = rand() % problem_list_len;
+    
+    for(int i = 0; i < random; i++) {
+        list = list->next;
+    }
+    return list;
+    
+}
+
 struct Problem file_to_problem(char ch_file_name[]) {
 
     char address[40] = "choices/";
@@ -49,7 +59,7 @@ struct Problem file_to_problem(char ch_file_name[]) {
 
 }
 
-void read_problems(struct Problem_Node **list) {
+void read_problems(struct Problem_Node **list, int *problem_list_len) {
 
     struct Problem_Node *last_node = *list;
 
@@ -59,6 +69,7 @@ void read_problems(struct Problem_Node **list) {
         exit;
     }
 
+    *problem_list_len = 0;
     char ch_file_name[10];
     while ( (fscanf(choices, "%s", ch_file_name)) != EOF ) {
         struct Problem problem = file_to_problem(ch_file_name);
@@ -70,6 +81,8 @@ void read_problems(struct Problem_Node **list) {
             last_node->next = new_node(problem);
             last_node = last_node->next;
         }
+
+        (*problem_list_len)++;
 
     }
 
@@ -87,9 +100,13 @@ void printlist(struct Problem_Node *list) {
 
 int main() {
 
+    srand(time(NULL));
+
     struct Problem_Node *problems_list = NULL;
-    read_problems(&problems_list);
-    printlist(problems_list);
+    int problem_list_len;
+    read_problems(&problems_list, &problem_list_len);
+    // printlist(problems_list);
+    printf("%s", get_random_problem(problems_list, problem_list_len)->problem.choice1.text);
 
     return 0;
 }
