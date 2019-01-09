@@ -24,11 +24,11 @@ problem_create:
 	gcc problem_create.c -o problem_create.out -lm ; \
 	./problem_create.out
 
-compile: main
+compile: main make_directory
 	@gcc *.o -o $(program).out -lm
 	@rm *.o
 
-main: parameters user list file leaderboard make_directory
+main: parameters user list file leaderboard
 	@gcc main.c -o main.o -c -lm
 
 parameters:
