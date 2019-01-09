@@ -15,6 +15,8 @@
 
 struct Problem_Node * new_node(struct Problem problem);
 void delete_at_index(struct Problem_Node **list, int index);
+void list_delete_all(struct Problem_Node **list);
+struct Problem_Node *get_at_index(int index, struct Problem_Node *list);
 int list_count(struct Problem_Node *list);
 
 #endif

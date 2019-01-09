@@ -40,6 +40,23 @@ void delete_at_index(struct Problem_Node **list, int index) {
 
 }
 
+void list_delete_all(struct Problem_Node **list) {
+
+    while (*list != NULL) {
+        struct Problem_Node *t = (*list)->next;
+        free(*list);
+        *list = t;
+    }
+
+}
+
+struct Problem_Node *get_at_index(int index, struct Problem_Node *list) {
+
+    for (int i = 0; i < index; i++, list = list->next) ;
+    return list;
+
+}
+
 int list_count(struct Problem_Node *list) {
     int i = 0;
     while (list != NULL) {

@@ -111,10 +111,12 @@ struct Problem file_to_problem(char ch_file_name[]) {
         exit;
     }
 
+    char kkp_junk;
     struct Problem prob;
     fgets(prob.text, 200, fp);
     fgets(prob.choice1.text, 200, fp);
-    fscanf(fp, "%d%d%d", &prob.choice1.effect.people, &prob.choice1.effect.court, &prob.choice1.effect.treasury);
+    fscanf(fp, "%d%d%d", &prob.choice1.effect.people, &prob.choice1.effect.court, &prob.choice1.effect.treasury, &kkp_junk, &kkp_junk);
+    fgets(prob.choice2.text, 5, fp);
     fgets(prob.choice2.text, 200, fp);
     fscanf(fp, "%d%d%d", &prob.choice2.effect.people, &prob.choice2.effect.court, &prob.choice2.effect.treasury);
     prob.num = 3;
@@ -124,6 +126,8 @@ struct Problem file_to_problem(char ch_file_name[]) {
 }
 
 void read_problems(struct Problem_Node **list) {
+
+    list_delete_all(list);
 
     struct Problem_Node *last_node = *list;
 
