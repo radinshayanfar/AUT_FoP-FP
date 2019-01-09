@@ -23,8 +23,8 @@
 #ifndef FILE_H
 #define FILE_H
 
-void save_to_file(struct Problem_Node *list, struct User user, enum State state);
-enum State restore_from_file(struct Problem_Node **list, struct User *user);
+void save_to_file(struct Problem_Node *list, struct User user, enum State state, int last_problem_index);
+enum State restore_from_file(struct Problem_Node **list, struct User *user, int *last_problem_index);
 struct Problem file_to_problem(char ch_file_name[]);
 void read_problems(struct Problem_Node **list);
 

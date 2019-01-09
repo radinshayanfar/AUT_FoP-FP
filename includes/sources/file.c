@@ -10,7 +10,7 @@
 
 #include "../headers/file.h"
 
-void save_to_file(struct Problem_Node *list, struct User user, enum State state) {
+void save_to_file(struct Problem_Node *list, struct User user, enum State state, int last_problem_index) {
 
     FILE *fp = fopen("saves/save.sgf", "wb");
 
@@ -40,12 +40,15 @@ void save_to_file(struct Problem_Node *list, struct User user, enum State state)
     // Writing user parameters
     fwrite(&(user.user_params), sizeof(user.user_params), 1, fp);
 
+    // Writing last problem index
+    fwrite(&last_problem_index, sizeof(int), 1, fp);
+
     // Closing file
     fclose(fp);
 
 }
 
-enum State restore_from_file(struct Problem_Node **list, struct User *user) {
+enum State restore_from_file(struct Problem_Node **list, struct User *user, int *last_problem_index) {
 
     FILE *fp = fopen("saves/save.sgf", "rb");
 
@@ -84,6 +87,9 @@ enum State restore_from_file(struct Problem_Node **list, struct User *user) {
 
     // Reading user parameters
     fread(&(user->user_params), sizeof(user->user_params), 1, fp);
+
+    // Reading last problem index
+    fread(last_problem_index, sizeof(int), 1, fp);
 
     // Closing file
     fclose(fp);

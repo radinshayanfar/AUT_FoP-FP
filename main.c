@@ -72,9 +72,9 @@ void show_leaderboard() {
 
 }
 
-void game_start(struct User *user, struct Problem_Node **list) {
+void game_start(struct User *user, struct Problem_Node **list, int *last_problem_index) {
 
-    enum State state = restore_from_file(list, user);
+    enum State state = restore_from_file(list, user, last_problem_index);
 
     if (state == NOT_SAVED) {
         get_user_name(user);
@@ -102,7 +102,7 @@ void game_start(struct User *user, struct Problem_Node **list) {
     printf("Hello %s!\n", user->name);
 }
 
-void game_end(struct Problem_Node *list, struct User user, enum State state) {
+void game_end(struct Problem_Node *list, struct User user, enum State state, int last_problem_index) {
 
     if (state == LOST) {
         save_to_leaderboard(user);
@@ -114,7 +114,7 @@ void game_end(struct Problem_Node *list, struct User user, enum State state) {
         scanf("%c%c", &yn_choice, &kkp_junk);
         yn_choice = toupper(yn_choice);
         if (yn_choice == 'Y') {
-            save_to_file(list, user, state);
+            save_to_file(list, user, state, last_problem_index);
         }
     } while ((yn_choice != 'Y') && (yn_choice != 'N'));
 
@@ -148,9 +148,15 @@ void use_problem(int index, struct Problem_Node **list, struct User *user, int c
 
 }
 
-void show_problem(struct Problem_Node **list, struct User *user) {
+void show_problem(struct Problem_Node **list, struct User *user, int *optional_index) {
 
-    int pr_index = get_random_problem(*list);
+    int pr_index;
+    if ( *optional_index != -1) {
+        pr_index = *optional_index;
+        *optional_index = -1;
+    } else {
+        pr_index = get_random_problem(*list);
+    }
     struct Problem_Node *problem = get_at_index(pr_index, *list);
 
     printf("%s", problem->problem.text);
@@ -164,9 +170,13 @@ void show_problem(struct Problem_Node **list, struct User *user) {
             use_problem(pr_index, list, user, choice - '0');
         }
         if (toupper(choice) == 'Q') {
-            game_end(*list, *user, IN_GAME);
+            game_end(*list, *user, IN_GAME, pr_index);
         }
     } while ((choice != '1') && (choice != '2') && (toupper(choice) != 'Q'));
+
+    if (is_lost(user->user_params)) {
+        game_end(*list, *user, LOST, pr_index);
+    }
 
 }
 
@@ -188,13 +198,11 @@ int main() {
     struct Problem_Node *problems_list = NULL;
     struct User user = User_User("");
 
-    game_start(&user, &problems_list);
+    int last_problem_index;
+    game_start(&user, &problems_list, &last_problem_index);
     while(true) {
         printf("People: %d, Court: %d, Treasury: %d\n", user.user_params.people, user.user_params.court, user.user_params.treasury);
-        show_problem(&problems_list, &user);
-        if (is_lost(user.user_params)) {
-            game_end(problems_list, user, LOST);
-        }
+        show_problem(&problems_list, &user, &last_problem_index);
     }
 
     return 0;
