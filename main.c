@@ -162,6 +162,7 @@ void show_problem(struct Problem_Node **list, struct User *user, int *optional_i
     printf("%s", problem->problem.text);
     printf("[1] %s", problem->problem.choice1.text);
     printf("[2] %s", problem->problem.choice2.text);
+    printf("[Q] Quit\n");
 
     char choice, kkp_junk;
     do {
