@@ -18,7 +18,7 @@ compile: main
 	@gcc *.o -o $(program).out -lm
 	@rm *.o
 
-main: parameters user list file
+main: parameters user list file leaderboard
 	@gcc main.c -o main.o -c -lm
 
 parameters:
@@ -32,3 +32,6 @@ list:
 
 file:
 	@gcc includes/sources/file.c -o file.o -c -lm
+
+leaderboard:
+	@gcc includes/sources/leaderboard.c -o leaderboard.o -c -lm

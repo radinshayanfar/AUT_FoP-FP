@@ -19,13 +19,9 @@
 #include "includes/headers/list.h"
 #include "includes/headers/file.h"
 #include "structures/headers/state.h"
+#include "includes/headers/leaderboard.h"
 
-#define DEBUG_MESSAGE(X) {\
-    printf("=== File: \"%s\" - ", __FILE__); \
-    printf("Function: \"%s\" - ", __func__); \
-    printf("Line: %d\n", __LINE__); \
-    printf("=== %s \n", X); \
-}
+#include "includes/debug.h"
 
 // ====================================== //
 
@@ -57,14 +53,19 @@ int main() {
     srand(time(NULL));
 
     struct User user = User_User("Radin Sh");
-    struct Problem_Node *problems_list = NULL;
-    read_problems(&problems_list);
+    user.user_params.people = 60;
+    user.user_params.court = 70;
+
+    // struct Problem_Node *problems_list = NULL;
+    // read_problems(&problems_list);
     // printf("%s", get_random_problem(problems_list)->problem.choice1.text);
     // printf("%d\n", list_count(problems_list));
     // save_to_file(problems_list, user, IN_GAME);
-    printf("%d\n", restore_from_file(&problems_list, &user));
-    printf("%d\n", user.user_params.court);
-    printlist(problems_list);
+    // printf("%d\n", restore_from_file(&problems_list, &user));
+    // printf("%d\n", user.user_params.court);
+    // printlist(problems_list);
+    save_to_leaderboard(user);
+    print_leaderboard();
 
     return 0;
 }
