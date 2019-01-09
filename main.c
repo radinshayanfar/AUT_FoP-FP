@@ -17,10 +17,10 @@
 
 #include "structures/headers/user.h"
 #include "structures/headers/linked_list.h"
-#include "includes/headers/list.h"
-#include "includes/headers/file.h"
 #include "structures/headers/state.h"
 #include "includes/headers/leaderboard.h"
+#include "includes/headers/list.h"
+#include "includes/headers/file.h"
 
 #include "includes/debug.h"
 

@@ -8,8 +8,6 @@
 
 // (c) 2019 - Radin Shayanfar
 
-#include "stdlib.h"
-#include "../../structures/headers/linked_list.h"
 #include "../headers/list.h"
 
 struct Problem_Node * new_node(struct Problem problem) {

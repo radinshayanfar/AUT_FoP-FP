@@ -8,7 +8,10 @@
 
 // (c) 2019 - Radin Shayanfar
 
+#include "stdlib.h"
 #include "../../structures/headers/linked_list.h"
+
+#include "../debug.h"
 
 #ifndef LIST_H
 #define LIST_H

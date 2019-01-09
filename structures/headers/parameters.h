@@ -8,6 +8,10 @@
 
 // (c) 2019 - Radin Shayanfar
 
+#include <string.h>
+
+#include "../../includes/debug.h"
+
 #ifndef PARAMETERS_H
 #define PARAMETERS_H
 

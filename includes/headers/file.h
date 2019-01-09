@@ -12,9 +12,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../headers/list.h"
 #include "../../structures/headers/state.h"
 #include "../../structures/headers/linked_list.h"
 #include "../../structures/headers/user.h"
+#include "../../structures/headers/problem.h"
+
+#include "../debug.h"
 
 #ifndef FILE_H
 #define FILE_H

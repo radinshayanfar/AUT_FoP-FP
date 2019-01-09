@@ -8,7 +8,6 @@
 
 // (c) 2019 - Radin Shayanfar
 
-#include <string.h>
 #include "../headers/parameters.h"
 
 struct Parameters Parameters_Parameters(int people, int court, int treasury) {

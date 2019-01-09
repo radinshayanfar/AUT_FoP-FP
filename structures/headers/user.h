@@ -8,7 +8,10 @@
 
 // (c) 2019 - Radin Shayanfar
 
+#include <string.h>
 #include "parameters.h"
+
+#include "../../includes/debug.h"
 
 #ifndef USER_H
 #define USER_H

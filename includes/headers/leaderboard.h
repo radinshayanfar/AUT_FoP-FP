@@ -8,7 +8,11 @@
 
 // (c) 2019 - Radin Shayanfar
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "../../structures/headers/user.h"
+
+#include "../debug.h"
 
 #define LEADERBOARD_SIZE 10
 

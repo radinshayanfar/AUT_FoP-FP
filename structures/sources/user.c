@@ -8,9 +8,7 @@
 
 // (c) 2019 - Radin Shayanfar
 
-#include <string.h>
 #include "../headers/user.h"
-#include "../headers/parameters.h"
 
 struct User User_User(char name[]){
     struct User user;

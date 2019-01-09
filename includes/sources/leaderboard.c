@@ -8,12 +8,7 @@
 
 // (c) 2019 - Radin Shayanfar
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "../headers/leaderboard.h"
-#include "../../structures/headers/user.h"
-
-#include "../debug.h"
 
 int user_compare(const void *u1, const void *u2) {
 
