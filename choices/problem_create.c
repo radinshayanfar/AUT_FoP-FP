@@ -28,7 +28,7 @@ int main() {
     FILE *chp = fopen(file_name, "w");
     if (chp == NULL) {
         fprintf(stderr, "Cannot open \"%s\"\n", file_name);
-        exit;
+        exit(0);
     }
     char inputstr[200];
     printf("Enter problem text:\n");

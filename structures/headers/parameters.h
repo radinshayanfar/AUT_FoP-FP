@@ -16,5 +16,9 @@ struct Parameters {
 };
 
 struct Parameters Parameters_Parameters(int people, int court, int treasury);
+void Parameters_change_people(struct Parameters *param, int change);
+void Parameters_change_court(struct Parameters *param, int change);
+void Parameters_change_treasury(struct Parameters *param, int change);
+float Parameters_get_average(struct Parameters param);
 
 #endif

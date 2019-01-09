@@ -25,7 +25,7 @@ void save_to_file(struct Problem_Node *list, struct User user, enum State state)
 
     if (fp == NULL) {
         fprintf(stderr, "Cannot open \"saves,save.sgf\"\n");
-        exit;
+        exit(0);
     }
 
     // Writing name
@@ -47,7 +47,7 @@ void save_to_file(struct Problem_Node *list, struct User user, enum State state)
     }
 
     // Writing user parameters
-    fwrite(&user.user_params, sizeof(user.user_params), 1, fp);
+    fwrite(&(user.user_params), sizeof(user.user_params), 1, fp);
 
     // Closing file
     fclose(fp);
@@ -92,7 +92,7 @@ enum State restore_from_file(struct Problem_Node **list, struct User *user) {
     } while (t.next != NULL);
 
     // Reading user parameters
-    fwrite(&(user->user_params), sizeof(user->user_params), 1, fp);
+    fread(&(user->user_params), sizeof(user->user_params), 1, fp);
 
     // Closing file
     fclose(fp);
@@ -108,14 +108,13 @@ struct Problem file_to_problem(char ch_file_name[]) {
     FILE *fp = fopen(address, "r");
     if (fp == NULL) {
         fprintf(stderr, "Cannot open \"%s\"\n", address);
-        exit;
+        exit(0);
     }
 
-    char kkp_junk;
     struct Problem prob;
     fgets(prob.text, 200, fp);
     fgets(prob.choice1.text, 200, fp);
-    fscanf(fp, "%d%d%d", &prob.choice1.effect.people, &prob.choice1.effect.court, &prob.choice1.effect.treasury, &kkp_junk, &kkp_junk);
+    fscanf(fp, "%d%d%d", &prob.choice1.effect.people, &prob.choice1.effect.court, &prob.choice1.effect.treasury);
     fgets(prob.choice2.text, 5, fp);
     fgets(prob.choice2.text, 200, fp);
     fscanf(fp, "%d%d%d", &prob.choice2.effect.people, &prob.choice2.effect.court, &prob.choice2.effect.treasury);
@@ -134,7 +133,7 @@ void read_problems(struct Problem_Node **list) {
     FILE *choices = fopen("choices/CHOICES.txt", "r");
     if (choices == NULL) {
         fprintf(stderr, "Cannot open \"CHOICES.txt\"\n");
-        exit;
+        exit(0);
     }
 
     char ch_file_name[10];
