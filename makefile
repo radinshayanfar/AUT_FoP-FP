@@ -28,7 +28,7 @@ compile: main
 	@gcc *.o -o $(program).out -lm
 	@rm *.o
 
-main: parameters user list file leaderboard
+main: parameters user list file leaderboard make_directory
 	@gcc main.c -o main.o -c -lm
 
 parameters:
@@ -45,3 +45,8 @@ file:
 
 leaderboard:
 	@gcc includes/sources/leaderboard.c -o leaderboard.o -c -lm
+
+make_directory:
+	@if [ ! -d "saves" ]; then \
+		mkdir saves; \
+	fi
