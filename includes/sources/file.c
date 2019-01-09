@@ -76,6 +76,7 @@ enum State restore_from_file(struct Problem_Node **list, struct User *user) {
     }
 
     // Reading problems list
+    *list = NULL;
     struct Problem_Node *last_node = *list, t;
     do {
         fread(&t, sizeof(struct Problem_Node), 1, fp);
