@@ -106,6 +106,7 @@ void game_end(struct Problem_Node *list, struct User user, enum State state, int
 
     if (state == LOST) {
         save_to_leaderboard(user);
+        printf("People: %d, Court: %d, Treasury: %d\n", user.user_params.people, user.user_params.court, user.user_params.treasury);
         printf("------- GAME OVER! -------\n");
     }
     char yn_choice, kkp_junk;
