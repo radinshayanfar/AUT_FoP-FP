@@ -76,6 +76,11 @@ void game_start(struct User *user, struct Problem_Node **list, int *last_problem
 
     enum State state = restore_from_file(list, user, last_problem_index);
 
+    if (state == DUMP) {
+        printf("Welcome back %s!\n", user->name);
+        return;
+    }
+
     if (state == NOT_SAVED) {
         get_user_name(user);
         read_problems(list);
@@ -106,7 +111,6 @@ void game_end(struct Problem_Node *list, struct User user, enum State state, int
 
     if (state == LOST) {
         save_to_leaderboard(user);
-        printf("People: %d, Court: %d, Treasury: %d\n", user.user_params.people, user.user_params.court, user.user_params.treasury);
         printf("------- GAME OVER! -------\n");
     }
     char yn_choice, kkp_junk;
@@ -118,6 +122,8 @@ void game_end(struct Problem_Node *list, struct User user, enum State state, int
             save_to_file(list, user, state, last_problem_index);
         }
     } while ((yn_choice != 'Y') && (yn_choice != 'N'));
+
+    remove("saves/dump.sgf");
 
     show_leaderboard();
     printf("Bye %s!\n", user.name);
@@ -158,12 +164,20 @@ void show_problem(struct Problem_Node **list, struct User *user, int *optional_i
     } else {
         pr_index = get_random_problem(*list);
     }
+
+    if (is_lost(user->user_params)) {
+        save_to_file(*list, *user, DUMP, pr_index);
+        game_end(*list, *user, LOST, pr_index);
+    }
+
     struct Problem_Node *problem = get_at_index(pr_index, *list);
 
     printf("%s", problem->problem.text);
     printf("[1] %s", problem->problem.choice1.text);
     printf("[2] %s", problem->problem.choice2.text);
     printf("[Q] Quit\n");
+
+    save_to_file(*list, *user, DUMP, pr_index);
 
     char choice, kkp_junk;
     do {
@@ -175,10 +189,6 @@ void show_problem(struct Problem_Node **list, struct User *user, int *optional_i
             game_end(*list, *user, IN_GAME, pr_index);
         }
     } while ((choice != '1') && (choice != '2') && (toupper(choice) != 'Q'));
-
-    if (is_lost(user->user_params)) {
-        game_end(*list, *user, LOST, pr_index);
-    }
 
 }
 

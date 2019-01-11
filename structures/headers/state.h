@@ -12,7 +12,7 @@
 #define STATE_H
 
 enum State {
-    IN_GAME, LOST, NOT_SAVED
+    IN_GAME, LOST, NOT_SAVED, DUMP
 };
 
 #endif

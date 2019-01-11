@@ -16,7 +16,7 @@ else
 	run_param = < $(i)
 endif
 
-run: compile
+run: compile make_directory
 	@./$(program).out $(run_param)
 
 problem_create:
@@ -24,7 +24,7 @@ problem_create:
 	gcc problem_create.c -o problem_create.out -lm ; \
 	./problem_create.out
 
-compile: main make_directory
+compile: main
 	@gcc *.o -o $(program).out -lm
 	@rm *.o
 
