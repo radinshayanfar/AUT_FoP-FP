@@ -98,6 +98,7 @@ void game_start(struct User *user, struct Problem_Node **list, int *last_problem
         if (yn_choice == 'N') {
             get_user_name(user);
             read_problems(list);
+            *last_problem_index = -1;
             printf("Hello %s!\n", user->name);
             return;
         }
