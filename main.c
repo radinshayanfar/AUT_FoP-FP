@@ -60,10 +60,11 @@ bool is_lost(struct Parameters param) {
 }
 void show_leaderboard() {
 
-    char yn_choice, kkp_junk;
+    char yn_choice, kkp_junk[100];
     do {
         printf("Do you want to see leaderboard? ([Y]es/[N]o): ");
-        scanf("%c%c", &yn_choice, &kkp_junk);
+        scanf("%c", &yn_choice);
+        fgets(kkp_junk, 100 - 1, stdin);
         yn_choice = toupper(yn_choice);
         if (yn_choice == 'Y') {
             print_leaderboard();
@@ -88,10 +89,11 @@ void game_start(struct User *user, struct Problem_Node **list, int *last_problem
         return;
     }
 
-    char yn_choice, kkp_junk;
+    char yn_choice, kkp_junk[100];
     do {
         printf("Do you want to load previously saved game? ([Y]es/[N]o): ");
-        scanf("%c%c", &yn_choice, &kkp_junk);
+        scanf("%c", &yn_choice);
+        fgets(kkp_junk, 100 - 1, stdin);
         yn_choice = toupper(yn_choice);
         if (yn_choice == 'N') {
             get_user_name(user);
@@ -113,10 +115,11 @@ void game_end(struct Problem_Node *list, struct User user, enum State state, int
         save_to_leaderboard(user);
         printf("------- GAME OVER! -------\n");
     }
-    char yn_choice, kkp_junk;
+    char yn_choice, kkp_junk[100];
     do {
         printf("Do you want to save game? ([Y]es/[N]o) ");
-        scanf("%c%c", &yn_choice, &kkp_junk);
+        scanf("%c", &yn_choice);
+        fgets(kkp_junk, 100 - 1, stdin);
         yn_choice = toupper(yn_choice);
         if (yn_choice == 'Y') {
             save_to_file(list, user, state, last_problem_index);
@@ -172,34 +175,25 @@ void show_problem(struct Problem_Node **list, struct User *user, int *optional_i
 
     struct Problem_Node *problem = get_at_index(pr_index, *list);
 
-    printf("%s", problem->problem.text);
-    printf("[1] %s", problem->problem.choice1.text);
-    printf("[2] %s", problem->problem.choice2.text);
-    printf("[Q] Quit\n");
+    Problem_print_problem(problem->problem);
 
     save_to_file(*list, *user, DUMP, pr_index);
 
-    char choice, kkp_junk;
+    char choice, kkp_junk[100];
     do {
-        scanf("%c%c", &choice, &kkp_junk);
+        scanf("%c", &choice);
+        fgets(kkp_junk, 100 - 1, stdin);
         if ((choice == '1') || (choice == '2')) {
             use_problem(pr_index, list, user, choice - '0');
         }
         if (toupper(choice) == 'Q') {
             game_end(*list, *user, IN_GAME, pr_index);
         }
+        if (toupper(choice) == 'L') {
+            print_leaderboard();
+            Problem_print_problem(problem->problem);
+        }
     } while ((choice != '1') && (choice != '2') && (toupper(choice) != 'Q'));
-
-}
-
-void printlist(struct Problem_Node *list) {
-
-    struct Problem_Node *current = list;
-    while (current != NULL) {
-        printf("%d ", current->problem.num);
-        current = current->next;
-    }
-    printf("\n");
 
 }
 
@@ -213,7 +207,7 @@ int main() {
     int last_problem_index;
     game_start(&user, &problems_list, &last_problem_index);
     while(true) {
-        printf("People: %d, Court: %d, Treasury: %d\n", user.user_params.people, user.user_params.court, user.user_params.treasury);
+        Parameters_print_all_params(user.user_params);
         show_problem(&problems_list, &user, &last_problem_index);
     }
 

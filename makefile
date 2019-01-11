@@ -28,7 +28,7 @@ compile: main
 	@gcc *.o -o $(program).out -lm
 	@rm *.o
 
-main: parameters user list file leaderboard
+main: parameters user problem list file leaderboard
 	@gcc main.c -o main.o -c -lm
 
 parameters:
@@ -36,6 +36,9 @@ parameters:
 
 user:
 	@gcc structures/sources/user.c -o user.o -c -lm
+
+problem:
+	@gcc structures/sources/problem.c -o problem.o -c -lm
 
 list:
 	@gcc includes/sources/list.c -o list.o -c -lm

@@ -53,3 +53,7 @@ float Parameters_get_average(struct Parameters param) {
     return (param.people + param.court + param.treasury) / 3.0;
 
 }
+
+void Parameters_print_all_params(struct Parameters param) {
+    printf("People: %d, Court: %d, Treasury: %d\n", param.people, param.court, param.treasury);
+}

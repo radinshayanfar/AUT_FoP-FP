@@ -19,4 +19,6 @@ struct Problem {
     int num;
 };
 
+void Problem_print_problem(struct Problem p);
+
 #endif

@@ -91,5 +91,6 @@ void print_leaderboard() {
     for (int i = 0; i < count; i++) {
         printf("%-20s| %-10d| %-10d| %-10d\n", leaderboard[i].name, leaderboard[i].user_params.people, leaderboard[i].user_params.court, leaderboard[i].user_params.treasury);
     }
+    for (int i = 0; i < 55; i++) printf("-"); printf("\n");
 
 }
