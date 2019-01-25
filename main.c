@@ -205,7 +205,7 @@ int main() {
     struct Problem_Node *problems_list = NULL;
     struct User user = User_User("");
 
-    int last_problem_index;
+    int last_problem_index = -1;
     game_start(&user, &problems_list, &last_problem_index);
     while(true) {
         Parameters_print_all_params(user.user_params);
